@@ -55,6 +55,8 @@ body {
     overflow-y: auto; /* Hanya sidebar yang scroll */
     overflow-x: hidden;
     z-index: 50;
+    flex-shrink: 0; /* KRITIS 1: Mencegah sidebar menyusut */
+    flex-basis: 250px;
 }
 
 /* Logo */
@@ -82,6 +84,7 @@ body {
     text-decoration: none;
     color: var(--color-text-light);
     font-size: 16px;
+    white-space: nowrap;
     transition: background-color 0.2s, font-weight 0.2s;
 }
 
@@ -998,7 +1001,145 @@ body {
     border-radius: 5px;
 }
 
-/* Input Form Umum (Pastikan ini sudah ada/diperkuat dari balasan sebelumnya) */
-/* .profile-input { ... } 
-.form-group label { ... }
-*/
+/* POPUP BAGIAN TAMBAH KELAS */
+/* Styling untuk Modal (Tambahkan ke file CSS Anda) */
+.custom-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%; /* Lebar di HP */
+    max-width: 450px; /* Lebar maksimal */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    color: #1e8449; /* Warna hijau gelap */
+    margin-top: 0;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Gaya Form */
+.form-row-popup {
+    margin-bottom: 15px;
+}
+
+.form-row-popup label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #1e8449;
+    font-size: 14px;
+}
+
+.form-row-popup .profile-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.form-row-popup.split-2 {
+    display: flex;
+    gap: 10px;
+}
+
+.form-row-popup.split-2 .form-group-popup {
+    flex: 1;
+}
+
+/* Gaya Tombol Aksi */
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.modal-actions .action-btn {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btn-simpan-kelas-modal {
+    background-color: #c09038; /* Coklat/Emas */
+    color: white;
+}
+
+#btn-simpan-kelas-modal:hover {
+    background-color: #a77c30;
+}
+
+/* Styling Khusus untuk Tab Filter (Jika belum ada) */
+.class-filter-tabs {
+    display: flex;
+    /* Margin bawah diatur di container header-content-actions */
+}
+
+.class-filter-tabs .tab {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #888; /* Warna teks tidak aktif */
+    font-weight: 500;
+    transition: color 0.3s, border-bottom 0.3s;
+    position: relative;
+    top: 2px; /* Geser sedikit ke bawah agar tidak terpotong garis */
+}
+
+.class-filter-tabs .tab.active {
+    color: #1e8449; /* Warna aktif (Hijau tua) */
+    border-bottom: 3px solid #1e8449; /* Garis bawah pekat */
+    font-weight: bold;
+}
+
+.header-content-actions {
+    /* Ini adalah gaya yang kami tambahkan secara inline di HTML, pastikan cocok */
+    padding-bottom: 15px; /* Jarak antara filter dan tabel */
+}
+
+.save-action-wrapper {
+    /* Posisi tombol simpan di kanan atas */
+    align-self: flex-start;
+}

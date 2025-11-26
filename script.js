@@ -1,5 +1,5 @@
 // ====================================================================
-// 1. KELAS UTAMA: UIManager (Manajemen Konten dan Navigasi) - DIMODIFIKASI
+// 1. KELAS UTAMA: UIManager (Manajemen Konten dan Navigasi) - MODIFIKASI
 // ====================================================================
 class UIManager {
     constructor() {
@@ -256,7 +256,7 @@ class UIManager {
                     }
                     
                 } else {
-                    this.showNotification("Gagal menghapus akun di server. Coba lagi.", 'cancel');
+                    this.showNotification("Gagal menghapus akun di server.", 'cancel');
                 }
             });
         }
@@ -289,6 +289,14 @@ class UIManager {
             
             this.initQuickActions(); 
             this.initTableActions(); 
+            
+            // Pastikan 'Dashboard' aktif saat memuat Dashboard
+            this.menuItems.forEach(i => i.classList.remove('active'));
+            const dashboardItem = Array.from(this.menuItems).find(item => item.textContent.trim() === 'Dashboard');
+            if (dashboardItem) {
+                dashboardItem.classList.add('active');
+            }
+            
             this.initMenuNavigation(); 
             document.dispatchEvent(new CustomEvent('reInitProfileManager')); 
             
@@ -297,7 +305,15 @@ class UIManager {
     }
     
     // **********************************************
-    // * FUNGSI BARU: Muat Konten Tambah Kelas *
+    // * FUNGSI BARU: Load Konten Daftar Kelas Santri *
+    // **********************************************
+    async loadDaftarKelasSantriContent() {
+        // Panggil loadContent untuk memuat daftar_kelas_santri.html dan mengaktifkan sidebar 'Daftar Kelas'
+        this.loadContent('Daftar Kelas', 'daftar_kelas_santri.html'); 
+    }
+
+    // **********************************************
+    // * FUNGSI MODIFIKASI: Muat Konten Tambah Kelas *
     // **********************************************
     async loadTambahKelasContent() {
         if (!this.mainContent) return;
@@ -317,16 +333,19 @@ class UIManager {
 
             // Inisialisasi aksi-aksi di halaman tersebut
             this.initTambahKelasActions(); 
-            
-            // Perbarui status menu sidebar menjadi 'Daftar Kelas'
+            this.initBackButton('Dashboard'); // Tambahkan listener untuk tombol kembali
+
+            // -----------------------------------------------------------------
+            // !!! MODIFIKASI INI HANYA MENGAKTIFKAN DASHBOARD DI SIDEBAR !!!
             this.menuItems.forEach(i => i.classList.remove('active'));
-            const daftarKelasItem = Array.from(this.menuItems).find(item => item.textContent.trim() === 'Daftar Kelas');
-            if (daftarKelasItem) {
-                daftarKelasItem.classList.add('active');
+            const dashboardItem = Array.from(this.menuItems).find(item => item.textContent.trim() === 'Dashboard');
+            if (dashboardItem) {
+                dashboardItem.classList.add('active'); 
             }
+            // -----------------------------------------------------------------
             
             document.dispatchEvent(new CustomEvent('reInitProfileManager')); 
-            console.log("[CONTENT] Konten Tambah Kelas berhasil dimuat.");
+            console.log("[CONTENT] Konten Tambah Kelas berhasil dimuat. Menu Sidebar: Dashboard (Aktif).");
 
         } catch (error) {
             console.error(`[ERROR ROUTING Tambah Kelas]`, error);
@@ -334,34 +353,166 @@ class UIManager {
     }
 
     // **********************************************
-    // * FUNGSI BARU: Inisialisasi Aksi di Halaman Tambah Kelas *
+    // * FUNGSI MODIFIKASI: Inisialisasi Aksi di Halaman Tambah Kelas *
     // **********************************************
     initTambahKelasActions() {
-        // Logika untuk tombol 'Tambah Kelas' di halaman itu sendiri (Inline)
-        const btnAddClassInline = document.querySelector('.add-class-button');
-        if (btnAddClassInline) {
-            // Rebind tombol untuk memastikan event listener baru
-            const newBtn = btnAddClassInline.cloneNode(true);
-            btnAddClassInline.replaceWith(newBtn);
+        const btnTambahKelas = document.getElementById('btn-tambah-kelas');
+        const kelasTingkatanSelect = document.getElementById('kelas-tingkatan');
+
+        // 1. Tangani klik tombol "Tambah Kelas" di bagian aksi cepat (MEMICU MODAL)
+        if (btnTambahKelas) {
+            const newBtn = btnTambahKelas.cloneNode(true);
+            btnTambahKelas.replaceWith(newBtn);
+            
             newBtn.addEventListener('click', () => {
-                this.showNotification("Simulasi: Kelas baru berhasil ditambahkan!", 'success');
+                const selectedTingkatan = kelasTingkatanSelect ? kelasTingkatanSelect.options[kelasTingkatanSelect.selectedIndex].text : 'Kelas Baru';
+                this.showKelasModal(selectedTingkatan);
             });
         }
         
-        // Logika untuk ikon add/delete di tabel kelas
-        const tableActions = document.querySelectorAll('.class-table .action-icons i');
-        tableActions.forEach(icon => {
-            // Rebind ikon untuk memastikan event listener baru
-            const newIcon = icon.cloneNode(true);
-            icon.replaceWith(newIcon);
+        // 2. Tangani ikon Aksi (+) di dalam Tabel (NAVIGASI KE DAFTAR KELAS SANTRI)
+        const tableBody = document.getElementById('kelas-table-body');
+        if (tableBody) {
+            tableBody.addEventListener('click', (e) => {
+                const target = e.target.closest('button');
+                if (!target) return;
 
-            newIcon.addEventListener('click', (e) => {
-                const action = e.target.classList.contains('fa-trash-can') ? 'Hapus' : 'Duplikasi/Tambah';
-                this.showNotification(`Simulasi: Aksi ${action} pada Kelas dijalankan.`, 'info');
+                const row = target.closest('.table-data-row');
+                const kelasNama = row ? row.querySelector('td:nth-child(2)').textContent.trim() : 'Kelas Baru';
+                
+                // Ikon Tambah (+) di tabel -> NAVIGASI KE DAFTAR KELAS SANTRI
+                if (target.classList.contains('btn-add-pengajar')) {
+                    console.log(`[AKSI TABEL] Navigasi ke Daftar Kelas Santri dari kelas: ${kelasNama}`);
+                    
+                    // *** PENTING: Panggil fungsi navigasi ke Daftar Kelas Santri ***
+                    this.loadDaftarKelasSantriContent();
+                } 
+                // Ikon Hapus
+                else if (target.classList.contains('btn-delete-kelas')) {
+                    if (confirm(`Anda yakin ingin menghapus kelas: ${kelasNama}?`)) {
+                        row.remove(); // Hapus baris dari DOM (simulasi)
+                        this.showNotification(`Kelas ${kelasNama} berhasil dihapus (simulasi).`, 'cancel');
+                    }
+                }
             });
-        });
+        }
+        
+        // 3. Inisialisasi Aksi Modal
+        this.initKelasModalActions();
+
+        // 4. Rebind tombol Kembali
+        this.initBackButton('Dashboard'); 
     }
 
+    // **********************************************
+    // * FUNGSI BARU: showKelasModal (DIPERTAHANKAN) *
+    // **********************************************
+    showKelasModal(kelasNama = 'Kelas Baru') {
+        const modal = document.getElementById('tambah-kelas-modal');
+        const kelasInput = document.getElementById('kelas-tingkatan-popup');
+
+        if (!modal) {
+            console.error('Elemen modal dengan ID "tambah-kelas-modal" tidak ditemukan.');
+            return;
+        }
+        
+        // Set nilai input Kelas/Tingkatan di modal
+        if (kelasInput) kelasInput.value = (kelasNama === '-- Pilih Tingkatan --') ? '' : kelasNama;
+        
+        // Bersihkan input lain jika diperlukan (optional)
+        document.getElementById('pengajar-popup').value = '';
+        document.getElementById('kapasitas-popup').value = '';
+        document.getElementById('kategori-popup').value = '';
+        document.getElementById('waktu-awal-popup').value = '';
+        document.getElementById('waktu-selesai-popup').value = '';
+        
+        // Tampilkan modal
+        modal.style.display = 'flex';
+        console.log(`[MODAL] Modal Tambah Kelas ditampilkan.`);
+    }
+
+    // **********************************************
+    // * FUNGSI MODIFIKASI: initKelasModalActions *
+    // **********************************************
+    initKelasModalActions() {
+        const modal = document.getElementById('tambah-kelas-modal');
+        if (!modal) return;
+        
+        const closeBtn = document.getElementById('close-kelas-modal');
+        const batalBtn = document.getElementById('btn-batal-kelas-modal');
+        const form = document.getElementById('form-tambah-kelas');
+
+        const closeModal = () => modal.style.display = 'none';
+
+        // 1. Tombol Close (X) di pojok (REBIND + HANYA MENUTUP MODAL)
+        if (closeBtn) {
+            const newCloseBtn = closeBtn.cloneNode(true);
+            closeBtn.replaceWith(newCloseBtn);
+            newCloseBtn.addEventListener('click', () => {
+                 closeModal();
+                 // TIDAK ADA TOAST
+            });
+        }
+        
+        // 2. Tombol Batalkan di bawah (REBIND + LOGIKA TOAST)
+        if (batalBtn) {
+            const newBatalBtn = batalBtn.cloneNode(true);
+            batalBtn.replaceWith(newBatalBtn);
+            
+            newBatalBtn.addEventListener('click', () => {
+                closeModal();
+                // TOAST DIMUNCULKAN DI SINI
+                this.showNotification('Pengisian dibatalkan.', 'cancel'); 
+            });
+        }
+        
+        // 3. Listener untuk Simpan (REBIND)
+        if (form) {
+            const newForm = form.cloneNode(true);
+            form.replaceWith(newForm);
+            
+            newForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Dapatkan data form
+                const data = {
+                    tingkatan: document.getElementById('kelas-tingkatan-popup').value,
+                    pengajar: document.getElementById('pengajar-popup').value,
+                    kapasitas: document.getElementById('kapasitas-popup').value,
+                    kategori: document.getElementById('kategori-popup').value,
+                    waktuAwal: document.getElementById('waktu-awal-popup').value,
+                    waktuSelesai: document.getElementById('waktu-selesai-popup').value,
+                };
+
+                // Lakukan validasi minimal
+                if (!data.tingkatan || !data.pengajar) {
+                    this.showNotification('Kelas/Tingkatan dan Pengajar wajib diisi.', 'cancel');
+                    return;
+                }
+
+                // Simulasi pengiriman data
+                const success = await this.saveDataToDatabase(null, { action: 'add_class', data });
+                
+                if (success) {
+                    this.showNotification(`Kelas ${data.tingkatan} berhasil disimpan!`, 'success');
+                } else {
+                     this.showNotification(`Gagal menyimpan kelas.`, 'cancel');
+                }
+                
+                closeModal();
+            });
+        }
+        
+        // 4. Tutup modal jika klik di luar area konten (HANYA MENUTUP MODAL)
+        if (!modal.dataset.listenerAdded) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            modal.dataset.listenerAdded = 'true';
+        }
+    }
 
     // **********************************************
     // * FUNGSI MODIFIKASI: INIT TOMBOL KEMBALI *
@@ -383,10 +534,10 @@ class UIManager {
                         pengajarMenuItem.classList.add('active');
                         this.loadContent('Daftar Pengajar', 'daftar_pengajar.html');
                     } else {
-                        this.loadDashboardContent();
+                        this.loadDashboardContent(); // Default ke Dashboard
                     }
                 } else {
-                    this.loadDashboardContent();
+                    this.loadDashboardContent(); // Kembali ke Dashboard
                 }
             });
         }
@@ -469,9 +620,8 @@ class UIManager {
             } else if (pageTitle === 'Daftar Pengajar') { 
                 targetFilename = 'daftar_pengajar.html'; 
             } else if (pageTitle === 'Daftar Kelas') {
-                 // Jika klik Daftar Kelas di sidebar, muat Tambah Kelas view
-                 this.loadTambahKelasContent();
-                 return;
+                // KOREKSI NAMA FILE: daftar_kelas_santri.html
+                targetFilename = 'daftar_kelas_santri.html';
             }
             
             const response = await fetch(targetFilename);
@@ -501,8 +651,18 @@ class UIManager {
 
             this.initBackButton('Dashboard'); 
             
+            // PENTING: Aktivasi Sidebar dilakukan di sini, karena konten baru sudah dimuat
+            const targetMenuItem = Array.from(this.menuItems).find(item => item.textContent.trim() === pageTitle);
+            this.menuItems.forEach(i => i.classList.remove('active'));
+            if (targetMenuItem) {
+                targetMenuItem.classList.add('active');
+            }
+
             if (pageTitle === 'Daftar Pengajar') { 
                 this.initTableActions(); 
+            } else if (pageTitle === 'Daftar Kelas') {
+                // Panggil inisialisasi aksi untuk Daftar Kelas Santri setelah konten dimuat
+                this.initDaftarKelasSantriActions();
             } else if (pageTitle === 'Tambah Siswa') {
                 this.initContentStatusActions();
             } else if (pageTitle === 'Tambah Pengajar') {
@@ -516,6 +676,108 @@ class UIManager {
         }
     }
     
+    // **********************************************
+    // * FUNGSI BARU: Inisialisasi Aksi di Halaman Daftar Kelas Santri *
+    // **********************************************
+    initDaftarKelasSantriActions() {
+        // 1. Logika Tab Filter
+        const tabs = document.querySelectorAll('.class-filter-tabs .tab');
+        const tableBody = document.getElementById('santri-kelas-table-body');
+        // Pastikan tabel body ada sebelum mencoba query rows
+        const rows = tableBody ? tableBody.querySelectorAll('.table-data-row') : [];
+        
+        if (tabs.length > 0) {
+            const applyFilter = (filter) => {
+                 // 1. Update active class pada tabs
+                 document.querySelectorAll('.class-filter-tabs .tab').forEach(t => {
+                     t.classList.remove('active');
+                     // Hapus garis tebal (indicator)
+                     const existingLine = t.querySelector('div');
+                     if (existingLine) existingLine.remove();
+                     t.style.fontWeight = 'normal';
+                     t.style.color = '#888';
+                 });
+                 
+                 const activeTab = document.querySelector(`.class-filter-tabs .tab[data-filter="${filter}"]`);
+                 if (activeTab) {
+                     activeTab.classList.add('active');
+                     activeTab.style.fontWeight = '600';
+                     activeTab.style.color = '#115533';
+                     
+                     // Tambahkan garis tebal (indicator) ke tab yang aktif
+                     const activeLine = document.createElement('div');
+                     activeLine.style.cssText = `
+                         position: absolute;
+                         bottom: -6px; 
+                         left: 0;
+                         width: 100%;
+                         height: 3px;
+                         background-color: #115533; 
+                         z-index: 10;
+                     `;
+                     activeTab.appendChild(activeLine);
+                 }
+
+
+                 // 2. Simulasi Pemfilteran Data
+                 console.log(`[FILTER] Mengubah filter kelas menjadi: ${filter}`);
+                 this.showNotification(`Menampilkan data filter: ${filter.toUpperCase()}`, 'info');
+                 
+                 // --- Logika Filter Sederhana ---
+                 rows.forEach(row => {
+                     // Ambil status dari kolom Status ke-7
+                     const statusCell = row.querySelector('td:nth-child(7)');
+                     const statusKelas = statusCell ? statusCell.textContent.trim() : '';
+
+                     let display = true;
+
+                     if (filter === 'belum-ada-kelas') {
+                         if (statusKelas !== 'Menunggu' && statusKelas !== 'Belum Ada') {
+                             display = false;
+                         }
+                     } else if (filter === 'sudah-ada-kelas') {
+                         if (statusKelas === 'Menunggu' || statusKelas === 'Belum Ada') {
+                              display = false;
+                         }
+                     } 
+                     // Filter 'semua' menampilkan semua
+                     row.style.display = display ? '' : 'none';
+                 });
+                 // --------------------------------
+            }
+
+
+            tabs.forEach(tab => {
+                // Rebind listener untuk tab filter
+                const newTab = tab.cloneNode(true);
+                tab.replaceWith(newTab);
+
+                newTab.addEventListener('click', (e) => {
+                    const filter = e.target.getAttribute('data-filter');
+                    applyFilter(filter);
+                });
+                
+                // Panggil applyFilter saat inisialisasi jika tab ini aktif (untuk menggambar garis)
+                if (newTab.classList.contains('active')) {
+                    applyFilter(newTab.getAttribute('data-filter'));
+                }
+            });
+        }
+
+        // 2. Inisialisasi tombol Simpan di halaman Daftar Kelas Santri
+        const saveAllBtn = document.querySelector('.save-class-changes-btn');
+        if (saveAllBtn) {
+            const newBtn = saveAllBtn.cloneNode(true);
+            saveAllBtn.replaceWith(newBtn);
+            newBtn.addEventListener('click', () => {
+                 this.showNotification("Simulasi: Perubahan kelas santri berhasil disimpan.", 'success');
+            });
+        }
+        
+        this.initBackButton('Dashboard'); 
+    }
+
+
     // --- LISTENER INITIALIZATION ---
 
     // **********************************************
@@ -525,16 +787,19 @@ class UIManager {
         this.menuItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
+                // Hanya hapus kelas active, tapi jangan segera tambahkan kelas active di sini
+                // Karena loadContent akan menanganinya
                 this.menuItems.forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
+                // item.classList.add('active'); // Dihapus sementara
                 
                 const menuText = item.textContent.trim();
                 let filename = `${menuText.toLowerCase().replace(/\s/g, '_')}.html`;
 
                 if (menuText === 'Dashboard') {
                     this.loadDashboardContent();
-                } else if (menuText === 'Daftar Kelas') { // <-- PENANGANAN UNTUK SIDEBAR DAFTAR KELAS
-                    this.loadTambahKelasContent();
+                } else if (menuText === 'Daftar Kelas') { 
+                    // Menggunakan loadContent untuk memastikan sidebar aktif dan nama file baru dimuat
+                    this.loadContent(menuText, 'daftar_kelas_santri.html');
                 } else if (!menuText.includes('Setting') && !menuText.includes('Keluar')) {
                     
                     if (menuText === 'Daftar Pengajar') {
@@ -566,7 +831,7 @@ class UIManager {
                 newBtn.addEventListener('click', () => {
                     this.loadContent('Tambah Pengajar', 'tambah_pengajar.html', null); 
                 });
-            } else if (btnText.includes('Tambah Kelas')) { // <-- PENANGANAN UNTUK TOMBOL TAMBAH KELAS DI DASHBOARD
+            } else if (btnText.includes('Tambah Kelas')) { 
                 newBtn.addEventListener('click', () => {
                     this.loadTambahKelasContent();
                 });
@@ -764,6 +1029,7 @@ class ProfileManager {
             const newLogoutButton = this.logoutButton.cloneNode(true);
             this.logoutButton.replaceWith(newLogoutButton);
             this.logoutButton = newLogoutButton;
+
             this.logoutButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 console.log("[LOGOUT] Proses keluar dijalankan. Mengarahkan ke halaman login...");
@@ -959,7 +1225,9 @@ class ProfileManager {
     closeDetailPopup(notify = false) {
         if (this.detailPopup) {
             this.detailPopup.style.display = 'none';
-            this.currentRow = null; 
+        }
+        if (notify) {
+            this.showNotification('Pengaturan Profil Dibatalkan.', 'cancel');
         }
     }
 
