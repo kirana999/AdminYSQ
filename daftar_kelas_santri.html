@@ -1,145 +1,140 @@
 <header class="dashboard-header">
-    <h1 class="header-title" id="page-content-title" style="text-align: left;">Daftar Kelas Santri</h1>
+    <h1 class="header-title" id="page-content-title">Daftar Kelas Santri</h1>
     <div class="admin-profile">
         <span class="admin-text">Rabu, 19 November 2025</span>
         <i class="fas fa-user-circle admin-icon"></i>
     </div>
 </header>
 
-<div class="page-container-left-aligned" style="
-    width: 100%; 
-    display: flex;
-    flex-direction: column;
-">
+<div class="page-container-left-aligned">
     
-    <div class="header-content-actions" 
-        style="
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            margin-top: 15px;
-            width: 100%; 
-            gap: 15px;
-        "
-    >
+    <div class="header-content-actions">
         
-        <div class="class-filter-select-wrapper" 
-            style="
-                width: 280px; 
-            "
-        >
-            <select id="kelas-filter-select" 
-                class="profile-input" 
-                style="
-                    width: 100%; 
-                    max-width: 280px; 
-                    padding: 10px 15px;
-                    font-size: 16px;
-                    border: 1px solid #275238;
-                    border-radius: 10px;
-                "
-            >
+        <div class="class-filter-select-wrapper">
+            <select id="kelas-filter-select" class="profile-input class-filter-select">
                 <option value="semua">Semua</option>
                 <option value="belum-ada-kelas">Belum Ada Kelas</option>
                 <option value="sudah-ada-kelas">Sudah Ada Kelas</option>
             </select>
         </div>
         
-        <div class="save-action-wrapper" style="margin-left: auto;">
-            <button class="action-btn save-class-changes-btn" 
-                style="
-                    background-color: #e5a546; 
-                    color: white; 
-                    padding: 10px 40px; 
-                    border: none; 
-                    border-radius: 5px;
-                    font-weight: bold;
-                    height: 45px; 
-                "
-            >
+        <div class="save-action-wrapper">
+            <button class="action-btn save-class-changes-btn primary-btn">
                 Simpan
             </button>
         </div>
     </div>
 
-    <section class="santri-class-table" 
-        style="
-            margin-top: 20px; 
-            width: 100%; 
-        "
-    >
+    <section class="santri-class-table-section">
         <div class="table-wrapper"> 
-            <table id="santri-kelas-list-table" style="width: 100%; border-collapse: collapse;">
+            <table id="santri-kelas-list-table" class="standard-table">
                 
-                <thead style="background-color: #fff;">
+                <thead>
                     <tr class="table-header-row">
-                        <th style="width: 5%; border: none; padding: 10px;"></th>
-                        <th style="width: 15%; border: none; padding: 10px;">Tanggal</th>
-                        <th style="width: 15%; border: none; padding: 10px;">NIM</th>
-                        <th style="width: 25%; border: none; padding: 10px;">Nama Siswa</th>
-                        <th style="width: 8%; border: none; padding: 10px;">Umur</th>
-                        <th style="width: 15%; border: none; padding: 10px;">Status Santri</th>
-                        <th style="width: 10%; border: none; padding: 10px;">Status</th>
-                        <th style="width: 7%; border: none; padding: 10px;">Aksi</th>
-                    </tr>
+                        <th></th>
+                        <th>Tanggal</th>
+                        <th>NIM</th>
+                        <th>Nama Siswa</th>
+                        <th>Umur</th>
+                        <th>Status Santri</th>
+                        <th>Status</th> </tr>
                 </thead>
                 
                 <tbody id="santri-kelas-table-body">
-                    <tr class="table-data-row" data-id="1" data-status-kelas="Menunggu"
-                        style="background-color: #fff; border-bottom: none;"
-                    >
-                        <td style="border: none; padding: 10px;"><input type="checkbox" class="santri-checkbox"></td>
-                        <td style="border: none; padding: 10px;">1 Oktober 2024</td>
-                        <td style="border: none; padding: 10px;">2459267655</td>
-                        <td style="border: none; padding: 10px;">zizah</td>
-                        <td style="border: none; padding: 10px;">19</td>
-                        <td class="status-cell" style="border: none; padding: 10px;"><span class="status-button status-accepted status-toggle" data-status="aktif" style="background-color: #38761d; color: white;">Aktif</span></td>
-                        <td class="status-cell" style="border: none; padding: 10px;">Menunggu</td>
-                        <td class="table-actions" style="border: none; padding: 10px;">
-                            <button class="btn-action btn-edit-santri-class" data-santri-id="1">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
+                    <tr class="table-data-row" data-id="1" data-status-kelas="Menunggu">
+                        <td><input type="checkbox" class="santri-checkbox"></td>
+                        <td>1 Oktober 2024</td>
+                        <td>2459267655</td>
+                        <td>Zizah</td>
+                        <td>19</td>
+                        <td class="status-cell"><span class="status-tag status-accepted status-toggle" data-status="aktif">Aktif</span></td>
+                        <td class="status-cell">
+                             <span class="status-tag status-belum-kelas">Menunggu</span>
                         </td>
-                    </tr>
-                    <tr class="table-data-row" data-id="2" data-status-kelas="Santri"
-                        style="background-color: #fff; border-bottom: none;"
-                    >
-                        <td style="border: none; padding: 10px;"><input type="checkbox" class="santri-checkbox"></td>
-                        <td style="border: none; padding: 10px;">1 Oktober 2024</td>
-                        <td style="border: none; padding: 10px;">2459267655</td>
-                        <td style="border: none; padding: 10px;">zizah</td>
-                        <td style="border: none; padding: 10px;">19</td>
-                        <td class="status-cell" style="border: none; padding: 10px;"><span class="status-button status-accepted status-toggle" data-status="aktif" style="background-color: #38761d; color: white;">Aktif</span></td>
-                        <td class="status-cell" style="border: none; padding: 10px;">Santri</td>
-                        <td class="table-actions" style="border: none; padding: 10px;">
-                            <button class="btn-action btn-edit-santri-class" data-santri-id="2">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
+                        </tr>
+                    
+                    <tr class="table-data-row" data-id="2" data-status-kelas="Santri">
+                        <td><input type="checkbox" class="santri-checkbox"></td>
+                        <td>1 Oktober 2024</td>
+                        <td>2459267655</td>
+                        <td>David</td>
+                        <td>18</td>
+                        <td class="status-cell"><span class="status-tag status-accepted status-toggle" data-status="aktif">Aktif</span></td>
+                        <td class="status-cell">
+                            <span class="status-tag status-sudah-kelas">Santri</span>
                         </td>
-                    </tr>
-                    <tr class="table-data-row" data-id="3" data-status-kelas="Belum Ada"
-                         style="background-color: #fff; border-bottom: none;"
-                    >
-                        <td style="border: none; padding: 10px;"><input type="checkbox" class="santri-checkbox"></td>
-                        <td style="border: none; padding: 10px;">3 Oktober 2025</td>
-                        <td style="border: none; padding: 10px;">2459267655</td>
-                        <td style="border: none; padding: 10px;">zizah</td>
-                        <td style="border: none; padding: 10px;">19</td>
-                        <td class="status-cell" style="border: none; padding: 10px;"><span class="status-button status-accepted status-toggle" data-status="aktif" style="background-color: #38761d; color: white;">Aktif</span></td>
-                        <td class="status-cell" style="border: none; padding: 10px;">Belum Ada</td>
-                        <td class="table-actions" style="border: none; padding: 10px;">
-                            <button class="btn-action btn-edit-santri-class" data-santri-id="3">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
+                        </tr>
+                    
+                    <tr class="table-data-row" data-id="3" data-status-kelas="Menunggu">
+                        <td><input type="checkbox" class="santri-checkbox"></td>
+                        <td>3 Oktober 2025</td>
+                        <td>2459267655</td>
+                        <td>Muhammad Ali Fulan</td>
+                        <td>19</td>
+                        <td class="status-cell"><span class="status-tag status-accepted status-toggle" data-status="aktif">Aktif</span></td>
+                        <td class="status-cell">
+                            <span class="status-tag status-belum-kelas">Menunggu</span>
                         </td>
-                    </tr>
+                        </tr>
                 </tbody>
             </table>
         </div>
     </section>
+
+    <div id="tambah-kelas-modal" class="custom-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tambah Kelas</h2>
+                <span class="close-btn" id="close-kelas-modal">&times;</span>
+            </div>
+            <form id="form-tambah-kelas" class="modal-form">
+                <div class="form-row-popup">
+                    <label for="kelas-tingkatan-popup">Kelas/Tingkatan</label>
+                    <input type="text" id="kelas-tingkatan-popup" class="profile-input" placeholder="Masukkan Tingkatan Kelas">
+                </div>
+                
+                <div class="form-row-popup split-2">
+                    <div class="form-group-popup">
+                        <label for="pengajar-popup">Pengajar</label>
+                        <select id="pengajar-popup" class="profile-input">
+                            <option value="">-- Pilih Pengajar --</option>
+                            <option value="SITI">SITI</option>
+                            <option value="DAVID">DAVID</option>
+                        </select>
+                    </div>
+                    <div class="form-group-popup">
+                        <label for="kapasitas-popup">Kapasitas</label>
+                        <input type="number" id="kapasitas-popup" class="profile-input" placeholder="Misalnya: 15">
+                    </div>
+                </div>
+
+                <div class="form-row-popup">
+                    <label for="kategori-popup">Kategori</label>
+                    <input type="text" id="kategori-popup" class="profile-input" placeholder="Misalnya: Dewasa">
+                </div>
+
+                <div class="form-row-popup split-2">
+                    <div class="form-group-popup">
+                        <label for="waktu-awal-popup">Waktu Awal Periode</label>
+                        <input type="date" id="waktu-awal-popup" class="profile-input">
+                    </div>
+                    <div class="form-group-popup">
+                        <label for="waktu-selesai-popup">Waktu Selesai Periode</label>
+                        <input type="date" id="waktu-selesai-popup" class="profile-input">
+                    </div>
+                </div>
+
+                <div class="modal-actions" style="justify-content: flex-end;">
+                    <button type="submit" class="action-btn save-btn" id="btn-simpan-kelas-modal">
+                        Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <button id="back-to-dashboard" class="action-btn back-btn" style="margin-top: 20px;">
+        <i class="fas fa-arrow-left"></i> Kembali
+    </button>
 </div>
-
-
-<button id="back-to-dashboard" class="action-btn back-btn" style="margin-top: 20px;">
-    <i class="fas fa-arrow-left"></i> Kembali
-</button>
