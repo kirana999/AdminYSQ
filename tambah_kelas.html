@@ -1,26 +1,25 @@
 <header class="dashboard-header">
-    <h1 class="header-title" id="page-content-title">Daftar Kelas</h1>
-    <div class="admin-profile">
+    <h1 class="header-title" id="page-content-title">Tambah Kelas</h1>
         <span class="admin-text">Rabu, 19 November 2025</span>
     </div>
 </header>
 
-<div class="class-action-area" style="display: flex; gap: 20px; align-items: flex-end; margin-bottom: 30px;">
+<div class="class-action-area action-area-styles">
     
-    <div class="form-group class-select-group" style="flex-grow: 1; display: flex; align-items: center; gap: 15px;">
+    <div class="form-group class-select-group select-group-styles">
         
-        <label for="kelas-tingkatan" style="margin-bottom: 0; font-weight: bold; min-width: 120px; text-align: right;">
+        <label for="kelas-tingkatan" class="kelas-label-styles">
             Kelas/Tingkatan
         </label>
         
-        <select id="kelas-tingkatan" class="profile-input" style="flex-grow: 1;">
+        <select id="kelas-tingkatan" class="profile-input class-select-styles">
             <option value="">-- Pilih Tingkatan --</option>
             <option value="idat_awal">Idat Awal</option>
             <option value="dewasa">Dewasa</option>
         </select>
     </div>
 
-    <button id="btn-tambah-kelas" class="action-btn" style="padding: 10px 15px; height: 45px; white-space: nowrap;">
+    <button id="btn-tambah-kelas" class="action-btn tambah-kelas-btn-styles">
         <i class="fas fa-plus-circle"></i> Tambah Kelas
     </button>
 </div>
@@ -36,7 +35,7 @@
                     <th>Kapasitas</th>
                     <th>Kategori</th>
                     <th>Pengajar</th>
-                    <th style="width: 140px;">Aksi</th> 
+                    <th class="aksi-kolom-styles">Aksi</th> 
                 </tr>
             </thead>
             <tbody id="kelas-table-body">
@@ -58,7 +57,7 @@
         </table>
     </div>
 </section>
-<div id="tambah-kelas-modal" class="custom-modal" style="display: none;">
+<div id="tambah-kelas-modal" class="custom-modal modal-hidden-styles">
     <div class="modal-content">
         <div class="modal-header">
             <h2>Tambah Kelas</h2>
@@ -110,7 +109,7 @@
     </div>
 </div>
 
-<div id="siswa-list-modal" class="custom-modal" style="display: none;">
+<div id="siswa-list-modal" class="custom-modal modal-hidden-styles">
     <div class="modal-content large-modal">
         <div class="modal-header">
             <h2 id="modal-siswa-title">Daftar Siswa Kelas [Nama Kelas]</h2>
@@ -139,6 +138,6 @@
         </div>
 </div>
 
-<button id="back-to-dashboard" class="action-btn back-btn" style="margin-top: 20px;">
+<button id="back-to-dashboard" class="action-btn back-btn back-btn-styles">
     <i class="fas fa-arrow-left"></i> Kembali
 </button>

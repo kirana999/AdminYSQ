@@ -48,9 +48,8 @@ class UIManager {
         
         this.initialDashboardHTML = this.mainContent ? this.mainContent.innerHTML : '';
         
-        // --- PROPERTI BARU UNTUK EDIT DETAIL ---
         this.currentPengajarId = null;
-        this.currentSantriId = null; // **PROPERTI BARU**
+        this.currentSantriId = null;
 
         this.initMenuNavigation();
         this.initQuickActions();
@@ -86,7 +85,6 @@ class UIManager {
     // * FUNGSI MODIFIKASI: Mengambil Data Siswa (20 Data Dummy) *
     // **********************************************
     async getSiswaDataByKelasId(kelasId) {
-        // ... (Fungsi getSiswaDataByKelasId tetap sama) ...
         await new Promise(resolve => setTimeout(resolve, 300));
 
         console.log(`[API SIMULASI] Mengambil 20 data siswa untuk Kelas ID: ${kelasId}`);
@@ -115,7 +113,6 @@ class UIManager {
     // * FUNGSI BARU: Handler Modal Daftar Siswa (Ikon Mata) *
     // **********************************************
     async handleViewSiswaModal(row) {
-        // ... (Fungsi handleViewSiswaModal tetap sama) ...
         const modal = document.getElementById('siswa-list-modal');
         const modalTitle = document.getElementById('modal-siswa-title');
         const siswaTableBody = document.getElementById('siswa-table-body');
@@ -189,7 +186,6 @@ class UIManager {
     // * FUNGSI BARU: Logic Toggle Status (Tabel) *
     // **********************************************
     togglePengajarStatus(element, newStatus) {
-        // ... (Fungsi togglePengajarStatus tetap sama) ...
         const row = element.closest('tr');
         const idPengajar = row ? row.getAttribute('data-id') : 'UNKNOWN';
 
@@ -219,7 +215,6 @@ class UIManager {
     // * FUNGSI BARU: Update Status di Tabel Utama *
     // **********************************************
     updatePengajarRowStatus(id, newStatus) {
-        // ... (Fungsi updatePengajarRowStatus tetap sama) ...
         const row = document.querySelector(`#pengajar-list-table tr[data-id="${id}"]`);
         if (!row) {
             console.error(`Baris pengajar dengan ID ${id} tidak ditemukan di tabel.`);
@@ -245,7 +240,6 @@ class UIManager {
     // * FUNGSI BARU: Inisialisasi Logika Edit/Simpan Detail Pengajar *
     // **********************************************
     initDetailEditActions() {
-        // ... (Fungsi initDetailEditActions tetap sama) ...
         const editButton = document.getElementById('btn-edit-mode');
         const saveButton = document.getElementById('btn-save-mode');
         const cancelButton = document.getElementById('btn-cancel-mode');
@@ -518,7 +512,6 @@ class UIManager {
     // --- ROUTING/CONTENT MANAGEMENT ---
     
     loadDashboardContent() {
-        // ... (Fungsi loadDashboardContent tetap sama) ...
         if (this.mainContent && this.initialDashboardHTML) {
             this.mainContent.innerHTML = this.initialDashboardHTML;
             
@@ -564,7 +557,7 @@ class UIManager {
             }
 
             // Inisialisasi aksi di halaman Daftar Santri (termasuk ikon pensil)
-            this.initDaftarSantriActions(); // **FUNGSI BARU**
+            this.initDaftarSantriActions();
             this.initTableActions(); // Inisialisasi ulang aksi tabel umum
             
             document.dispatchEvent(new CustomEvent('reInitProfileManager'));
@@ -642,8 +635,7 @@ class UIManager {
             // Set Category Card
             const categoryCard = document.querySelector('#form-detail-santri .category-card');
             if (categoryCard) {
-                 categoryCard.textContent = data.kategori;
-                 // Asumsi: Kita atur warna berdasarkan kategori jika perlu (tidak ada di CSS yang diberikan)
+                categoryCard.textContent = data.kategori;
             }
 
             document.getElementById('input-username').value = data.username;
@@ -653,7 +645,7 @@ class UIManager {
             document.getElementById('input-terdaftar').value = data.terdaftar; // Input type text
 
             // 3. Panggil inisialisasi Edit/Simpan
-            this.initDetailSantriEditActions(); // **FUNGSI BARU**
+            this.initDetailSantriEditActions();
             
             document.dispatchEvent(new CustomEvent('reInitProfileManager'));
             
@@ -668,7 +660,6 @@ class UIManager {
     // * FUNGSI BARU: Muat Konten Daftar Jadwal *
     // **********************************************
     async loadDaftarJadwalContent() {
-        // ... (Fungsi loadDaftarJadwalContent tetap sama) ...
         if (!this.mainContent) return;
 
         try {
@@ -705,7 +696,6 @@ class UIManager {
     // * FUNGSI BARU: Inisialisasi Aksi Modal Edit Jadwal *
     // **********************************************
     initEditJadwalModalActions() {
-        // ... (Fungsi initEditJadwalModalActions tetap sama) ...
         const modal = document.getElementById('edit-jadwal-modal');
         if (!modal) return;
 
@@ -776,7 +766,6 @@ class UIManager {
     // * FUNGSI BARU: Inisialisasi Aksi Modal Tambah Jadwal Baru *
     // **********************************************
     initTambahJadwalModalActions() {
-        // ... (Fungsi initTambahJadwalModalActions tetap sama) ...
         const modal = document.getElementById('tambah-jadwal-modal');
         if (!modal) return;
 
@@ -827,7 +816,6 @@ class UIManager {
     // * FUNGSI BARU: Inisialisasi Aksi di Halaman Daftar Jadwal *
     // **********************************************
     initJadwalActions() {
-        // ... (Fungsi initJadwalActions tetap sama) ...
         const btnTambah = document.getElementById('btn-tambah-jadwal');
         const tableBody = document.getElementById('jadwal-table-body');
         const editModal = document.getElementById('edit-jadwal-modal');
@@ -880,7 +868,6 @@ class UIManager {
     // * FUNGSI MODIFIKASI: loadDaftarKelasSantriContent *
     // **********************************************
     async loadDaftarKelasSantriContent(data = null) {
-        // ... (Fungsi loadDaftarKelasSantriContent tetap sama) ...
         if (!this.mainContent) return;
         
         const targetFilename = 'daftar_kelas_santri.html';
@@ -919,7 +906,6 @@ class UIManager {
     // * FUNGSI BARU: Logika Filter Tabel Kelas Santri *
     // **********************************************
     initClassFilter() {
-        // ... (Fungsi initClassFilter tetap sama) ...
         const filterSelect = document.getElementById('kelas-filter-select');
         const tableBody = document.getElementById('santri-kelas-table-body');
         
@@ -960,7 +946,6 @@ class UIManager {
     // * FUNGSI BARU: Inisialisasi Aksi di Halaman Daftar Kelas Santri *
     // **********************************************
     initDaftarKelasSantriActions() {
-        // ... (Fungsi initDaftarKelasSantriActions tetap sama) ...
         const saveButton = document.querySelector('.save-class-changes-btn');
         const filterSelect = document.getElementById('kelas-filter-select');
 
@@ -986,7 +971,7 @@ class UIManager {
                  if (filterSelect) {
                      const selectedOption = filterSelect.options[filterSelect.selectedIndex];
                      if (selectedOption.value !== 'semua') {
-                          targetClassName = selectedOption.textContent;
+                         targetClassName = selectedOption.textContent;
                      }
                  }
 
@@ -1012,7 +997,6 @@ class UIManager {
     // * FUNGSI MODIFIKASI: Muat Konten Tambah Kelas *
     // **********************************************
     async loadTambahKelasContent() {
-        // ... (Fungsi loadTambahKelasContent tetap sama) ...
         if (!this.mainContent) return;
 
         try {
@@ -1049,7 +1033,6 @@ class UIManager {
     // * FUNGSI MODIFIKASI: Inisialisasi Aksi di Halaman Tambah Kelas *
     // **********************************************
     initTambahKelasActions() {
-        // ... (Fungsi initTambahKelasActions tetap sama) ...
         const btnTambahKelas = document.getElementById('btn-tambah-kelas');
 
         if (btnTambahKelas) {
@@ -1092,7 +1075,6 @@ class UIManager {
     // * FUNGSI showKelasModal (DIPERTAHANKAN) *
     // **********************************************
     showKelasModal(kelasNama = 'Kelas Baru') {
-        // ... (Fungsi showKelasModal tetap sama) ...
         const modal = document.getElementById('tambah-kelas-modal');
         const kelasInput = document.getElementById('kelas-tingkatan-popup');
 
@@ -1114,7 +1096,6 @@ class UIManager {
     // * FUNGSI MODIFIKASI: initKelasModalActions (DIBUAT LEBIH STABIL & SESUAI ALUR BARU) *
     // **********************************************
     initKelasModalActions() {
-        // ... (Fungsi initKelasModalActions tetap sama) ...
         const modal = document.getElementById('tambah-kelas-modal');
         if (!modal) return;
         
@@ -1204,7 +1185,7 @@ class UIManager {
             } else {
                 this.loadDashboardContent();
             }
-        } else if (previousPageTitle === 'Daftar Santri') { // **LOGIKA BARU**
+        } else if (previousPageTitle === 'Daftar Santri') {
             const santriMenuItem = Array.from(this.menuItems).find(item => item.textContent.trim() === 'Daftar Santri');
             if (santriMenuItem) {
                 this.loadDaftarSantriContent();
@@ -1220,7 +1201,6 @@ class UIManager {
     // * FUNGSI MODIFIKASI: MUAT KONTEN DETAIL PENGAJAR *
     // **********************************************
     async loadDetailPengajarContent(idPengajar) {
-        // ... (Fungsi loadDetailPengajarContent tetap sama) ...
         if (!this.mainContent) return;
 
         this.currentPengajarId = idPengajar;
@@ -1273,10 +1253,9 @@ class UIManager {
     }
 
     // **********************************************
-    // * FUNGSI MODIFIKASI: loadContent *
+    // * FUNGSI MODIFIKASI: loadContent (Menambahkan rute registrasi_siswa.html) *
     // **********************************************
     async loadContent(pageTitle, filename, data = null) {
-        // ... (Fungsi loadContent tetap sama) ...
         if (!this.mainContent) return;
 
         try {
@@ -1285,6 +1264,8 @@ class UIManager {
 
             if (pageTitle === 'Tambah Siswa') {
                 targetFilename = 'tambah_siswa.html';
+            } else if (pageTitle === 'Daftar Pendaftar') { 
+                targetFilename = 'registrasi_siswa.html';
             } else if (pageTitle === 'Tambah Pengajar') {
                 targetFilename = 'tambah_pengajar.html';
             } else if (pageTitle === 'Daftar Pengajar') {
@@ -1293,7 +1274,7 @@ class UIManager {
                 return this.loadDaftarKelasSantriContent();
             } else if (pageTitle === 'Daftar Jadwal') {
                 return this.loadDaftarJadwalContent();
-            } else if (pageTitle === 'Daftar Santri') { // **LOGIKA BARU**
+            } else if (pageTitle === 'Daftar Santri') {
                 return this.loadDaftarSantriContent();
             }
             
@@ -1324,7 +1305,7 @@ class UIManager {
 
             this.initBackButton('Dashboard');
             
-            if (pageTitle === 'Daftar Pengajar') {
+            if (pageTitle === 'Daftar Pengajar' || pageTitle === 'Daftar Pendaftar') {
                 this.initTableActions();
             } else if (pageTitle === 'Tambah Siswa') {
                 this.initContentStatusActions();
@@ -1345,7 +1326,6 @@ class UIManager {
     // * FUNGSI MODIFIKASI: initMenuNavigation *
     // **********************************************
     initMenuNavigation() {
-        // ... (Fungsi initMenuNavigation tetap sama) ...
         this.menuItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1361,7 +1341,7 @@ class UIManager {
                     this.loadDaftarJadwalContent();
                 } else if (menuText === 'Daftar Kelas') {
                     this.loadDaftarKelasSantriContent();
-                } else if (menuText === 'Daftar Santri') { // **LOGIKA BARU**
+                } else if (menuText === 'Daftar Santri') {
                     this.loadDaftarSantriContent();
                 } else if (!menuText.includes('Setting') && !menuText.includes('Keluar')) {
                     
@@ -1375,17 +1355,20 @@ class UIManager {
     }
 
     // **********************************************
-    // * FUNGSI MODIFIKASI: initQuickActions *
+    // * FUNGSI MODIFIKASI: initQuickActions (Diperbaiki Arah Tambah Siswa) *
     // **********************************************
     initQuickActions() {
-        // ... (Fungsi initQuickActions tetap sama) ...
         const actionButtons = document.querySelectorAll('.action-btn');
         
         actionButtons.forEach(btn => {
-            btn.onclick = () => {
-                const btnText = btn.textContent.trim();
+            const newBtn = btn.cloneNode(true);
+            btn.replaceWith(newBtn);
+
+            newBtn.onclick = () => {
+                const btnText = newBtn.textContent.trim();
 
                 if (btnText.includes('Tambah Siswa')) {
+                    // MEMASTIKAN: Panggilan ke loadContent untuk tambah_siswa.html
                     this.loadContent('Tambah Siswa', 'tambah_siswa.html', null);
                 } else if (btnText.includes('Tambah Pengajar')) {
                     this.loadContent('Tambah Pengajar', 'tambah_pengajar.html', null);
@@ -1399,10 +1382,28 @@ class UIManager {
     }
 
     // **********************************************
-    // * FUNGSI MODIFIKASI: initTableActions *
+    // * FUNGSI MODIFIKASI: initTableActions (Diperbaiki Arah Lihat Semua Pendaftar) *
     // **********************************************
     initTableActions() {
-        // ... (Fungsi initTableActions tetap sama) ...
+        
+        // =========================================================
+        // PERBAIKAN FOKUS: Tombol Lihat Semua Pendaftar (Menargetkan kelas)
+        // =========================================================
+        const allApplicantsButton = document.querySelector('.see-all-applicants-btn');
+
+        if (allApplicantsButton) {
+            // Hapus listener lama dan pasang listener baru pada clone node
+            const newAllApplicantsButton = allApplicantsButton.cloneNode(true);
+            allApplicantsButton.replaceWith(newAllApplicantsButton);
+
+            newAllApplicantsButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log("[NAVIGASI] Mengarahkan ke halaman Registrasi Siswa (registrasi_siswa.html).");
+                // Panggil loadContent dengan pageTitle 'Daftar Pendaftar'
+                this.loadContent('Daftar Pendaftar', 'registrasi_siswa.html');
+            });
+        }
+        
         // --- Logika Status Buttons (Lihat Detail Pendaftar) ---
         const statusButtons = document.querySelectorAll('.pendaftar-table .status-btn');
         
@@ -1485,7 +1486,6 @@ class UIManager {
     }
     
     initLogout() {
-        // ... (Fungsi initLogout tetap sama) ...
         if (this.logoutButton) {
             const newLogoutButton = this.logoutButton.cloneNode(true);
             this.logoutButton.replaceWith(newLogoutButton);
@@ -1499,7 +1499,6 @@ class UIManager {
     }
 
     initContentStatusActions() {
-        // ... (Fungsi initContentStatusActions tetap sama) ...
         const detailButtons = document.querySelectorAll('#siswa-list-table .status-detail, #siswa-list-table .status-accepted, #siswa-list-table .status-rejected');
         
         detailButtons.forEach(detailButton => {
@@ -1527,13 +1526,11 @@ class UIManager {
     }
 }
 
-
 // ====================================================================
 // 2. KELAS UTAMA: PROFILE MANAGER (Logika Pop-up dan Update Tabel)
 // ====================================================================
 class ProfileManager {
     constructor() {
-        // ... (Konstruktor ProfileManager tetap sama) ...
         this.settingButton = document.querySelector('.footer-btn.setting');
         this.settingPopup = document.getElementById('popup-profile-setting');
         this.closeSettingPopupBtn = document.getElementById('close-setting-popup');
@@ -1570,7 +1567,6 @@ class ProfileManager {
     // * FUNGSI BARU: Rebind Tombol Setting/Logout *
     // **********************************************
     rebindSettingButton() {
-        // ... (Fungsi rebindSettingButton tetap sama) ...
         this.settingButton = document.querySelector('.footer-btn.setting');
         if (this.settingButton) {
             this.settingButton.onclick = (e) => {
@@ -1590,7 +1586,6 @@ class ProfileManager {
     }
     
     rebindAllProfileActions() {
-        // ... (Fungsi rebindAllProfileActions tetap sama) ...
         this.rebindHeaderListeners();
         this.rebindSettingButton();
         this.initFormActions();
@@ -1598,7 +1593,6 @@ class ProfileManager {
     }
     
     rebindHeaderListeners() {
-        // ... (Fungsi rebindHeaderListeners tetap sama) ...
         this.adminIcon = document.getElementById('dashboard-admin-icon');
         this.miniProfileCard = document.getElementById('popup-profile-mini');
         this.dashboardAdminName = document.getElementById('dashboard-admin-name');
@@ -1629,7 +1623,6 @@ class ProfileManager {
     }
     
     updateAvatars(name) {
-        // ... (Fungsi updateAvatars tetap sama) ...
         const nameParts = name.split(' ');
         const shortName = nameParts.length > 0 ? nameParts[0] : 'Admin';
         
@@ -1649,7 +1642,6 @@ class ProfileManager {
     }
     
     getInitials(name) {
-        // ... (Fungsi getInitials tetap sama) ...
         if (!name) return 'R';
         const parts = name.trim().split(/\s+/);
         if (parts.length > 1) {
@@ -1661,7 +1653,6 @@ class ProfileManager {
     // --- POPUP SETTING PROFILE ---
     
     initSettingPopupToggle() {
-        // ... (Fungsi initSettingPopupToggle tetap sama) ...
         if (!this.settingPopup) return;
         
         if (this.closeSettingPopupBtn) {
@@ -1682,7 +1673,6 @@ class ProfileManager {
     }
 
     openSettingPopup() {
-        // ... (Fungsi openSettingPopup tetap sama) ...
         if (this.settingPopup) {
             if (document.getElementById('profile-name-input')) document.getElementById('profile-name-input').value = this.currentProfile.name;
             if (document.getElementById('profile-email-input')) document.getElementById('profile-email-input').value = this.currentProfile.email;
@@ -1695,7 +1685,6 @@ class ProfileManager {
     }
     
     closeSettingPopup(notify = false) {
-        // ... (Fungsi closeSettingPopup tetap sama) ...
         if (this.settingPopup) {
             this.settingPopup.style.display = 'none';
         }
@@ -1710,7 +1699,6 @@ class ProfileManager {
     // * PERBAIKAN: initFormActions (Mengatasi Konflik Form/Submit) *
     // **********************************************
     initFormActions() {
-        // ... (Fungsi initFormActions tetap sama) ...
         this.saveButton = document.querySelector('#popup-profile-setting .save-btn');
         if (!this.saveButton) return;
         
@@ -1731,7 +1719,6 @@ class ProfileManager {
     }
     
     updateDisplayedInitials(name) {
-        // ... (Fungsi updateDisplayedInitials tetap sama) ...
         const initials = this.getInitials(name);
         const profileAvatarLarge = document.querySelector('.profile-avatar-large');
         
@@ -1747,7 +1734,6 @@ class ProfileManager {
     // * PERBAIKAN: handleSaveProfile (Menggunakan UIManager untuk Notifikasi) *
     // **********************************************
     handleSaveProfile() {
-        // ... (Fungsi handleSaveProfile tetap sama) ...
         const newName = document.getElementById('profile-name-input').value;
         const newEmail = document.getElementById('profile-email-input').value;
         const newPhone = document.getElementById('profile-phone-input').value;
@@ -1769,7 +1755,6 @@ class ProfileManager {
     // --- POPUP DETAIL PENDAFTAR ---
     
     initDetailPopupToggle() {
-        // ... (Fungsi initDetailPopupToggle tetap sama) ...
         this.detailPopup = document.getElementById('popup-detail-pendaftar');
         if (!this.detailPopup) return;
         
@@ -1784,7 +1769,6 @@ class ProfileManager {
     }
 
     openDetailPopup(data) {
-        // ... (Fungsi openDetailPopup tetap sama) ...
         if (!this.detailPopup) return;
         this.currentRow = data.rowElement || null;
         
@@ -1793,7 +1777,6 @@ class ProfileManager {
     }
 
     closeDetailPopup(notify = false) {
-        // ... (Fungsi closeDetailPopup tetap sama) ...
         if (this.detailPopup) {
             this.detailPopup.style.display = 'none';
             this.currentRow = null;
@@ -1801,7 +1784,6 @@ class ProfileManager {
     }
 
     updateTableRowStatus(status) {
-        // ... (Fungsi updateTableRowStatus tetap sama) ...
         if (!this.currentRow) return;
 
         const statusCellIndex = this.currentRow.cells.length - 1;
@@ -1824,13 +1806,11 @@ class ProfileManager {
     }
     
     handleAccept() {
-        // ... (Fungsi handleAccept tetap sama) ...
         this.updateTableRowStatus('DITERIMA');
         this.closeDetailPopup();
     }
     
     handleReject() {
-        // ... (Fungsi handleReject tetap sama) ...
         this.updateTableRowStatus('DITOLAK');
         this.closeDetailPopup();
     }

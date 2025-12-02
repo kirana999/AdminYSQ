@@ -7,7 +7,7 @@
     --color-medium-green: #376C4A; /* Warna hover menu */
     --color-sidebar-footer: #163528; /* Background menu aktif/footer */
     
-    --color-main-content-bg: #EAECE2; /* Background untuk area konten utama (Off-White/Beige Muda) */
+    --color-main-content-bg: #f7f7f7; /* Background untuk area konten utama (Off-White/Beige Muda) */
     --color-card-bg: #FFFFFF; /* Background untuk kartu & tabel */
 
     --color-text-dark: #333;
@@ -263,7 +263,7 @@ body {
     background-color: var(--color-action-btn);
     border: none;
     padding: 15px 25px;
-    border-radius: var(--radius-small);
+    border-radius: 5px var(--radius-small);
     font-size: 16px;
     font-weight: bold;
     color: var(--color-dark-green);
@@ -279,6 +279,37 @@ body {
 .action-btn i {
     margin-right: 8px;
 }
+
+/* Gaya khusus untuk mensejajarkan Judul dan Tombol (botton baru "lihat */
+        .pendaftar-header-controls {
+            display: flex;
+            justify-content: space-between; /* Pisahkan judul dan tombol */
+            align-items: center; /* Sejajarkan vertikal di tengah */
+            margin-bottom: 15px; /* Jarak antara header kontrol dan tabel */
+        }
+        
+        /* Gaya untuk tombol kecil */
+        .small-action-btn {
+            background-color: #38761d;
+            color: white;
+            padding: 8px 15px; /* Kurangi padding untuk membuat tombol kecil */
+            border: none;
+            border-radius: 5px;
+            font-size: 14px; /* Ukuran font lebih kecil */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap; /* Pastikan tombol tidak terpotong */
+        }
+        .small-action-btn:hover {
+            background-color: #2b5a15;
+        }
+        /* Pastikan .section-title tidak terpengaruh oleh flex, tetapi sejajar */
+        .pendaftar-header-controls .section-title {
+             margin-bottom: 0; /* Hapus margin bawah default dari section-title */
+        }
+
+
 
 /* Tabel Pendaftar */
 .pendaftar-table table {
@@ -1609,11 +1640,6 @@ html, body {
     box-sizing: border-box;
 }
 
-/* HAPUS STYLING UNTUK .btn-tambah-sesi karena tombolnya sudah dihapus dari HTML */
-/* Jika Anda memiliki tombol lain dengan class ini di tempat lain, pisahkan stylenya. */
-/* Jika tidak, bisa dihapus total dari sini. */
-/* .action-btn.primary-btn.btn-tambah-sesi { ... } */
-
 /* Tabel Sesi di dalam modal */
 .small-table {
     font-size: 13px;
@@ -1769,4 +1795,147 @@ html, body {
     color: #275238 !important; /* Teks Hijau Tua */
     font-weight: bold;
     border-radius: 5px !important;
+}
+
+/*BAGIAN DETAIL DATA SANTRI*/
+
+/* --- Container Utama (Menggantikan inline styles) --- */
+.card-detail-wrapper {
+    background-color: var(--color-secondary);
+    padding: 25px; 
+    border-radius: 0; /* Hilangkan radius jika ini wrapper luar */
+    box-shadow: none; 
+    margin-top: 0; /* Hapus margin agar rapi */
+}
+
+/* --- Section Styling (Kartu Putih) --- */
+.info-section {
+    background-color: var(--color-card-bg);
+    border: 1px solid #ccc; /* Border tipis di sekitar kartu */
+    border-radius: var(--radius-small);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 25px; 
+    padding: 0; 
+}
+
+.info-title-bar {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-card-bg); /* Warna teks putih */
+    background-color: var(--color-dark-green); /* Background Hijau Tua */
+    padding: 10px 20px;
+    border-radius: var(--radius-small) var(--radius-small) 0 0; /* Hanya di sudut atas */
+    text-transform: uppercase;
+}
+
+/* --- Grid Layout (Menjamin 2 Kolom Input Per Baris) --- */
+.info-grid {
+    display: grid;
+    /* 4 kolom virtual (2 field per baris) */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px 30px; 
+    padding: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    grid-column: span 2; /* SETENGAH LEBAR (2/4 kolom) */
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1; /* LEBAR PENUH */
+}
+
+/* --- Input & Label Styling --- */
+
+label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-label);
+    text-transform: none;
+}
+
+.detail-input,
+.detail-select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; 
+    height: 36px;
+}
+
+.detail-input[disabled],
+.detail-select[disabled] {
+    background-color: var(--color-input-disabled);
+    cursor: default;
+    color: #333;
+}
+
+/* --- Styling Role dan Status (Sederhana seperti Kolom Lain) --- */
+
+/* Input Role (Default terlihat seperti input disabled biasa, tapi diwarnai) */
+.input-role-display {
+    background-color: var(--color-role-siswa); 
+    color: white; 
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Input Status: Dibuat seperti kolom input disabled biasa di View Mode */
+.input-status-display {
+    background-color: var(--color-input-disabled);
+    color: #333; /* Font normal */
+    text-align: left;
+    font-weight: normal;
+}
+
+/* --- Kategori (Badge di bawah Informasi Dasar) --- */
+.category-bar {
+    text-align: center;
+    margin-top: -10px; /* Tarik ke atas */
+}
+.category-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    background-color: #e09947; /* Warna oranye figma */
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* --- Terdaftar (Footer Info) --- */
+.registered-info {
+    grid-column: 1 / -1; 
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* --- Tombol Bawah (Kembali & Simpan) --- */
+#back-to-dashboard {
+    margin-top: 25px;
+    background-color: var(--color-dark-green);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-small);
+}
+.save-btn-detail {
+    background-color: var(--color-accent-edit) !important;
+    color: white !important; 
+    padding: 10px 25px !important;
+    font-weight: bold;
+}
+.detail-actions {
+    display: flex;
+    justify-content: flex-end; /* Simpan di kanan */
+    margin-top: 20px;
 }

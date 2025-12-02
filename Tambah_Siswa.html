@@ -1,57 +1,187 @@
- <header class="content-header page-header">
-                <h1 class="header-title" id="page-content-title">Tambah Siswa</h1> 
-                <div class="admin-profile">
-                    <span class="admin-text">Rabu, 19 November 2025</span>
+<header class="dashboard-header">
+    <h1 class="header-title" id="page-content-title">Tambah Siswa</h1>
+    <div class="admin-profile">
+        <span class="admin-text">Rabu, 19 November 2025</span>
+    </div>
+</header>
+<div class="content-wrapper form-page-siswa-clean">
+    <div class="form-container-siswa-clean">
+        <form id="form-tambah-siswa">
+            
+            <h3 style="color: var(--color-dark-green); border-bottom: 1px solid var(--color-dark-green); padding-bottom: 5px; margin-bottom: 20px;">
+            <i class="fas fa-user"></i> Data Personal
+        </h3>
+            <div class="form-grid">
+                
+                <div class="form-group">
+                    <label for="input-nisn">NISN</label>
+                    <input type="text" id="input-nisn" required>
                 </div>
-            </header>
+                <div class="form-group">
+                    <label for="input-nama-lengkap">Nama Lengkap</label>
+                    <input type="text" id="input-nama-lengkap" required>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="input-alamat">Alamat</label>
+                    <input type="text" id="input-alamat" required>
+                </div>
 
-            <section class="stats-cards content-stats-page">
-                <div class="stat-card"><span class="stat-label">Pendaftar</span><span class="stat-value">12</span></div>
-                <div class="stat-card"><span class="stat-label">Menunggu verifikasi</span><span class="stat-value">12</span></div>
-                <div class="stat-card"><span class="stat-label">Diterima</span><span class="stat-value">12</span></div>
-                <div class="stat-card"><span class="stat-label">Sisa kuota</span><span class="stat-value">12</span></div>
-            </section>
-
-            <div class="header-actions">
-                <input type="text" placeholder="Cari Siswa..." class="search-input">
-                <div>
-                    <button class="action-btn export-btn"><i class="fas fa-file-export"></i> Ekspor Laporan</button>
-                    <button class="action-btn reset-btn">Reset Pendaftaran Tahunan</button>
+                <div class="form-group">
+                    <label for="input-tempat-lahir">Tempat Lahir</label>
+                    <input type="text" id="input-tempat-lahir">
+                </div>
+                <div class="form-group">
+                    <label for="input-tanggal-lahir">Tanggal Lahir</label>
+                    <input type="date" id="input-tanggal-lahir" placeholder="mm/dd/yyyy">
                 </div>
             </div>
 
-            <section class="pendaftar-table">
-                <div class="section-title">Daftar Siswa</div>
-                <div class="table-wrapper"> 
-                    <table id="siswa-list-table">
-                        <thead>
-                            <tr class="table-header-row">
-                                <th>No.</th><th>Nama Lengkap</th><th>Tempat Lahir</th><th>Tanggal Lahir</th><th>Nomor WhatsApp</th><th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="siswa-table-body">
-                            <tr class="table-data-row">
-                                <td>1</td><td>Ahmad Zaki</td><td>Bogor</td><td>28 Oktober 2010</td><td>0986478997543</td>
-                                <td class="status-cell">
-                                   <button class="status-button status-detail">Lihat Detail</button>
-                                </td>
-                            </tr>
-                            <tr class="table-data-row">
-                                <td>2</td><td>Siti Aminah</td><td>Bandung</td><td>10 Mar 2010</td><td>0855xxxxxx</td>
-                                <td class="status-cell">
-                                <button class="status-button status-detail">Lihat Detail</button>
-                                </td>
-                            </tr>
-                            <tr class="table-data-row">
-                                <td>3</td><td>Budi Santoso</td><td>Jakarta</td><td>20 Jan 2005</td><td>0812xxxxxx</td>
-                                <td class="status-cell">
-                                <button class="status-button status-detail">Lihat Detail</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <h3 style="color: var(--color-dark-green); border-bottom: 1px solid var(--color-dark-green); padding-bottom: 5px; margin-top: 30px; margin-bottom: 20px;">
+             <i class="fas fa-book-open"></i> Detail Kontak & Kualifikasi
+        </h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="input-kelas">Kelas</label>
+                    <input type="text" id="input-kelas" placeholder="Contoh: Aisyah, Umar">
                 </div>
-            </section>
-            <button id="back-to-dashboard" class="action-btn back-btn" style="margin-top: 20px;">
-    <i class="fas fa-arrow-left"></i> Kembali
-            </button>
+                <div class="form-group">
+                    <label for="input-jenjang">Jenjang</label>
+                    <div class="radio-group" id="input-jenjang">
+                        <label>
+                            <input type="radio" name="jenjang" value="Dewasa" required> Dewasa
+                        </label>
+                        <label>
+                            <input type="radio" name="jenjang" value="Anak-Anak"> Anak-Anak
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="input-email">Email</label>
+                    <input type="email" id="input-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-no-telepon">NO Telpon / WhatsApp</label>
+                    <input type="tel" id="input-no-telepon">
+                </div>
+            </div>
+
+            <div class="form-actions-bottom-centered">
+                <button type="submit" class="action-btn save-btn">Simpan</button>
+            </div>
+        </form>
+    </div>
+        </button>
+    </div>
+</div>
+<style>
+
+/* --- Gaya Umum Kontainer Formulir --- */
+.content-wrapper.form-page-siswa-clean {
+    padding: 2px;
+}
+
+.form-container-siswa-clean {
+    /* PENYESUAIAN LEBAR: Dibuat lebih besar */
+    max-width: 1100px; 
+    /* Margin diatur auto agar tetap di tengah saat lebar */
+    margin: 0 auto; 
+    
+    background-color: white; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
+    padding: 30px 40px; /* Tambah padding internal agar konten tidak mepet */
+}
+
+/* --- Gaya Header Bagian (Garis Pemisah dan Judul) --- */
+.form-section-header {
+    color: #38761d; 
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 0;
+    margin: 20px 0 15px 0;
+    border-bottom: 1px solid var(--color-dark-green); 
+    line-height: 2;
+}
+
+.form-section-header:first-of-type {
+    margin-top: 0;
+}
+
+/* --- Gaya Grid Formulir --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px; /* Jarak antar kolom dan baris sedikit diperlebar */
+}
+
+.form-group {
+    margin-bottom: 5px; 
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1; 
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333; 
+    font-size: 0.9em;
+}
+
+/* --- Gaya Input Fields --- */
+.form-container-siswa-clean input[type="text"],
+.form-container-siswa-clean input[type="date"],
+.form-container-siswa-clean input[type="email"],
+.form-container-siswa-clean input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: white; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) inset;
+    line-height: 1.2;
+}
+
+/* --- Gaya Jenjang (Radio Group) --- */
+.radio-group {
+    display: flex;
+    gap: 30px;
+    padding: 5px 0;
+}
+.radio-group label {
+    font-weight: normal;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* --- Gaya Tombol Aksi --- */
+.form-actions-bottom-centered {
+    display: flex;
+    justify-content: center; 
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0; 
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.save-btn {
+    background-color: #E5A546; 
+}
+
+</style>

@@ -16,82 +16,87 @@
             <i class="fas fa-times"></i> Batal
         </button>
     </div>
+    <form id="form-detail-santri">
+        
+        <div class="info-section info-dasar-section">
+            <div class="info-title-bar">Informasi Dasar</div>
+            <div class="info-grid">
+                
+                <div class="form-group">
+                    <label for="input-nisn">NISN</label>
+                    <input type="text" id="input-nisn" class="detail-input" value="249078561" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-nama-lengkap">Nama Lengkap</label>
+                    <input type="text" id="input-nama-lengkap" class="detail-input" value="David (Anak)" disabled>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="input-alamat">Alamat</label>
+                    <input type="text" id="input-alamat" class="detail-input" value="Jl. Contoh No. 123, Bogor" disabled>
+                </div>
 
-    <h3 class="form-section-title" style="font-size: 16px; font-weight: bold; color: var(--color-dark-green); padding-bottom: 5px; margin-bottom: 15px;">Informasi Dasar</h3>
-    <form id="form-detail-pengajar">
-        
-        <div class="form-row" style="display: flex; gap: 20px; margin-bottom: 15px;">
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-nim-nip" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">NIP</label>
-                <input type="text" id="input-nim-nip" class="profile-input" value="249078561" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-nama" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Nama Lengkap</label>
-                <input type="text" id="input-nama" class="profile-input" value="Lalisa" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-        </div>
-        
-        <div class="form-row" style="display: flex; margin-bottom: 15px;">
-            <div class="form-group col-full" style="flex: 1;">
-                <label for="input-alamat" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Alamat</label>
-                <input type="text" id="input-alamat" class="profile-input" value="Bogor" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-        </div>
+                <div class="form-group">
+                    <label for="input-tanggal-lahir">Tanggal Lahir</label>
+                    <input type="date" id="input-tanggal-lahir" class="detail-input" value="2010-05-15" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-tempat-lahir">Tempat Lahir</label>
+                    <input type="text" id="input-tempat-lahir" class="detail-input" value="Bandung" disabled>
+                </div>
 
-        <div class="form-row" style="display: flex; gap: 20px; margin-bottom: 15px;">
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-tgl-lahir" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Tanggal Lahir</label>
-                <input type="text" id="input-tgl-lahir" class="profile-input" value="05/34/2009" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-telepon" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">No. Telepon</label>
-                <input type="text" id="input-telepon" class="profile-input" value="0812-xxx-xxxx" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-        </div>
-        
-        <div class="form-row" style="display: flex; gap: 20px; margin-bottom: 25px;">
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-kelas" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Kelas</label>
-                <input type="text" id="input-kelas" class="profile-input" value="Quran" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-role" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Role</label>
-                <input type="text" id="input-role" class="profile-input" value="Santri" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-        </div>
-        
-        
-        <h3 class="form-section-title" style="font-size: 16px; font-weight: bold; color: var(--color-dark-green); padding-bottom: 5px; margin-bottom: 15px;">Informasi Akun</h3>
-
-        <div class="form-row" style="display: flex; gap: 20px; margin-bottom: 15px;">
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-username" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Username</label>
-                <input type="text" id="input-username" class="profile-input" value="Lisa.santri" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
-            </div>
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-email" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Email</label>
-                <input type="email" id="input-email" class="profile-input" value="santri@gmail.ac.id" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                <div class="form-group">
+                    <label for="input-no-telepon">No. Telepon</label>
+                    <input type="text" id="input-no-telepon" class="detail-input" value="0812-1111-2222" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-kelas">Kelas</label>
+                    <select id="input-kelas" class="detail-select" disabled>
+                        <option value="usmanil" selected>Usmanil</option>
+                        <option value="aishah">Aishah</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <div class="form-row" style="display: flex; gap: 20px; margin-bottom: 15px;">
-            
-            <div class="form-group col-half" style="flex: 1;">
-                <label style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Aksi Akun</label>
-                <button id="btn-hapus-akun-detail" class="action-btn" style="background-color: #dc3545; color: white; padding: 8px 15px; border-radius: 4px; font-size: 14px; width: 100%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <i class="fas fa-trash-alt"></i> Hapus Akun
-                </button>
-            </div>
-            
-            <div class="form-group col-half" style="flex: 1;">
-                <label for="input-terdaftar" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Terdaftar Sejak</label>
-                <input type="text" id="input-terdaftar" class="profile-input" value="23 November 2025, 1:03 PM" disabled style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+        <div class="info-section info-akun-section">
+            <div class="info-title-bar">Informasi Akun</div>
+            <div class="info-grid">
+                
+                <div class="form-group">
+                    <label for="input-username">Username</label>
+                    <input type="text" id="input-username" class="detail-input" value="david_sq_anak" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-email">Email</label>
+                    <input type="email" id="input-email" class="detail-input" value="anak@gmail.ac.id" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label for="input-status">Status</label>
+                    <span id="status-display" class="detail-input input-status-display" disabled>Aktif</span>
+                    
+                    <select id="input-status-select" class="detail-select" disabled style="display: none;">
+                        <option value="Aktif">Aktif</option>
+                        <option value="Tidak Aktif">Tidak Aktif</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-role">Role</label>
+                    <input type="text" id="input-role" class="detail-input input-role-display" value="Siswa" disabled>
+                </div>
+
+                <div class="form-group registered-info full-width">
+                    <label for="input-terdaftar-label">Terdaftar :</label>
+                    <span id="input-terdaftar-datetime" class="registered-datetime">19 November 2025, 10:00 AM</span> 
+                </div>
             </div>
         </div>
-
+        
     </form>
 </div>
 
-<button id="back-to-dashboard" class="action-btn back-btn" style="margin-top: 25px; background-color: var(--color-dark-green); color: white; padding: 10px 20px; border-radius: var(--radius-small); font-size: 14px;">
+<button id="back-to-dashboard" class="action-btn back-btn"> 
     <i class="fas fa-arrow-left"></i> Kembali
 </button>

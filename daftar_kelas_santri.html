@@ -1,8 +1,6 @@
 <header class="dashboard-header">
-    <h1 class="header-title" id="page-content-title">Daftar Kelas Santri</h1>
-    <div class="admin-profile">
+    <h1 class="header-title" id="page-content-title">Daftar Kelas</h1>
         <span class="admin-text">Rabu, 19 November 2025</span>
-        <i class="fas fa-user-circle admin-icon"></i>
     </div>
 </header>
 
@@ -81,60 +79,77 @@
         </div>
     </section>
 
-    <div id="tambah-kelas-modal" class="custom-modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Tambah Kelas</h2>
-                <span class="close-btn" id="close-kelas-modal">&times;</span>
-            </div>
-            <form id="form-tambah-kelas" class="modal-form">
-                <div class="form-row-popup">
-                    <label for="kelas-tingkatan-popup">Kelas/Tingkatan</label>
-                    <input type="text" id="kelas-tingkatan-popup" class="profile-input" placeholder="Masukkan Tingkatan Kelas">
-                </div>
-                
-                <div class="form-row-popup split-2">
-                    <div class="form-group-popup">
-                        <label for="pengajar-popup">Pengajar</label>
-                        <select id="pengajar-popup" class="profile-input">
-                            <option value="">-- Pilih Pengajar --</option>
-                            <option value="SITI">SITI</option>
-                            <option value="DAVID">DAVID</option>
-                        </select>
-                    </div>
-                    <div class="form-group-popup">
-                        <label for="kapasitas-popup">Kapasitas</label>
-                        <input type="number" id="kapasitas-popup" class="profile-input" placeholder="Misalnya: 15">
-                    </div>
-                </div>
-
-                <div class="form-row-popup">
-                    <label for="kategori-popup">Kategori</label>
-                    <input type="text" id="kategori-popup" class="profile-input" placeholder="Misalnya: Dewasa">
-                </div>
-
-                <div class="form-row-popup split-2">
-                    <div class="form-group-popup">
-                        <label for="waktu-awal-popup">Waktu Awal Periode</label>
-                        <input type="date" id="waktu-awal-popup" class="profile-input">
-                    </div>
-                    <div class="form-group-popup">
-                        <label for="waktu-selesai-popup">Waktu Selesai Periode</label>
-                        <input type="date" id="waktu-selesai-popup" class="profile-input">
-                    </div>
-                </div>
-
-                <div class="modal-actions" style="justify-content: flex-end;">
-                    <button type="submit" class="action-btn save-btn" id="btn-simpan-kelas-modal">
-                        Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
 
 
-    <button id="back-to-dashboard" class="action-btn back-btn" style="margin-top: 20px;">
-        <i class="fas fa-arrow-left"></i> Kembali
-    </button>
+<div id="siswa-list-modal" class="custom-modal" style="display: none;">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h2 id="modal-siswa-title">Daftar Santri Kelas [Nama Kelas]</h2>
+            <span class="close-btn" id="close-siswa-modal">&times;</span>
+        </div>
+        
+        <div class="modal-body scrollable-table-area"> 
+            
+            <div class="table-wrapper">
+                <table id="siswa-table">
+                    <thead>
+                        <tr class="table-header-row">
+                            <th>No.</th>
+                            <th>NIM</th>
+                            <th>Nama Santri</th>
+                            <th>Umur</th>
+                            <th>Kelas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="siswa-table-body-statis">
+                        <tr data-kelas-id="1">
+                            <td>1.</td>
+                            <td>2459267101</td>
+                            <td>Ahmad 1 (Dummy Kelas Idat Awal)</td>
+                            <td>20</td>
+                            <td>Idat Awal</td>
+                        </tr>
+                         <tr data-kelas-id="1">
+                            <td>2.</td>
+                            <td>2459267102</td>
+                            <td>Budi 2 (Dummy Kelas Idat Awal)</td>
+                            <td>18</td>
+                            <td>Idat Awal</td>
+                        </tr>
+                        <tr data-kelas-id="2">
+                            <td>3.</td>
+                            <td>2459267103</td>
+                            <td>Citra 3 (Dummy Kelas Aishah)</td>
+                            <td>19</td>
+                            <td>Aishah</td>
+                        </tr>
+                         <tr data-kelas-id="2">
+                            <td>4.</td>
+                            <td>2459267104</td>
+                            <td>Dewi 4 (Dummy Kelas Aishah)</td>
+                            <td>22</td>
+                            <td>Aishah</td>
+                        </tr>
+                         <tr data-kelas-id="3">
+                            <td>5.</td>
+                            <td>2459267105</td>
+                            <td>Eko 5 (Dummy Kelas Umar)</td>
+                            <td>21</td>
+                            <td>Umar</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
 </div>
+
+<div id="tambah-kelas-modal" class="custom-modal" style="display: none;">
+    </div>
+
+
+<button id="back-to-dashboard" class="action-btn back-btn back-btn-styles" style="margin-top: 20px;">
+    <i class="fas fa-arrow-left"></i> Kembali
+</button>
